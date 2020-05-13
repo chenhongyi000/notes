@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .d1{background:LightSkyBlue;}
+        .d2{background:LightSalmon;}
+        .d3{background:PaleTurquoise;}
+        .d4{background:LightPink;}
+        .d5{background:PaleGreen;}
+      
+        .container {
+            font-size: 40px;
+            width: 100%;
+            background: LightGray;
+            display: grid;
+            /* 参数个数为列数 像素代表宽度 */
+            grid-template-columns: 50px 50px 50px;
+            /* grid-template-rows: 50px 50px; */
+            /* auto 自动与内容适应 fr除去px与百分比(%)后按比例分配  */
+            /* grid-template-columns: auto 50px 2fr 1fr 1fr; */
+            /* 为列增加空隙 */
+            /* grid-column-gap: 10px; */
+            /* 为行增加空隙 */
+            /* grid-row-gap: 10px; */
+            grid-gap: 10px;
+        }
+      </style>
+      
+      <div class="container">
+        <div class="d1">1</div>
+        <div class="d2">2</div>
+        <div class="d3">3</div>
+        <div class="d4">4</div>
+        <div class="d5">5</div>
+      </div>
+      
+</body>
+</html>
