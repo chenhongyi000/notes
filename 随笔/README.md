@@ -438,3 +438,128 @@ grid-row-gap: 为行增加空隙
 ```
 
 gird-gap: 当参数只有一个时，为行列都添加空隙 两个参数 第一个为行间距 第二个为列间距
+
+# 2020.5.14
+
+## Grid布局
+
+### justify-self
+
+将元素中的内容在单元格中水平对齐 默认值为stretch
+
+| justify-self | 默认值为stretch          |
+| ------------ | ------------------------ |
+| start        | 将内容对齐到单元格左侧   |
+| center       | 将内容对齐到单元格的中心 |
+| end          | 将内容对齐到单元格的右侧 |
+
+![](F:\notes\随笔\images\justify-self.png)
+
+将整个容器设置justify-items: center 
+
+![](F:\notes\随笔\images\justify-items.png)
+
+### align-self
+
+将元素中的内容在单元格中垂直对齐 取值与上述justify-self相同
+
+![](F:\notes\随笔\images\align-self.png)
+
+容器设定align-items: center
+
+![](F:\notes\随笔\images\align-items.png)
+
+### grid-template-areas
+
+将网格划分为区域模板
+
+```css
+/*
+	顶部三个单元格合并为header
+	底部三个单元格合并为footer
+	中间两个区域advert content
+*/
+grid-template-areas:
+  "header header header"
+  "advert content content"
+  "footer footer footer";
+```
+
+```css
+/*将5设置为footer*/
+.item5 {
+    background: PaleGreen;
+    grid-area: footer;
+}
+```
+
+![](F:\notes\随笔\images\grid-area.png)
+
+也可不适用模板
+
+```css
+/*起始行/起始列/终止行/终止列*/
+item1 { grid-area: 1/1/2/4; }
+```
+
+![](F:\notes\随笔\images\不使用模板创建.png)
+
+### repeat()
+
+repeat()函数减少重复 repeat(重复次数，宽度)
+
+```css
+/*两种方式等价*/
+grid-template-rows: 1fr 1fr 1fr;
+grid-template-rows: repeat(3,1fr);
+```
+
+repeat自动填充
+
+```css
+/* 自动填充 如果填充所有元素大于容器宽度 则另起一行开始 */
+repeat(auto-fill,minmax(60px,1fr));
+```
+
+![](F:\notes\随笔\images\自动填充.png)
+
+auto-fit 自动填充元素 元素会自动拉伸
+
+auto-fill 自动填充元素 没有元素后添加空元素
+
+### minmax()
+
+minmax()函数 限制元素大小 minmax(最小限度，最大限度)
+
+```css
+/*重复三列 最小90px 最大1fr*/
+grid-template-columns: repeat(3,minmax(90px,1fr));
+```
+
+### 媒体查询响应式
+
+```css
+ @media (min-width: 300px){
+     .container{
+         grid-template-columns: auto 1fr;
+         grid-template-rows: auto 1fr auto;
+         /*左侧 上中下*/
+         grid-template-areas:
+             "advert header"
+             "advert content"
+             "advert footer";
+     }
+}
+@media (min-width: 400px){
+    .container{
+        /*上中下*/
+        grid-template-areas:
+            "header header"
+            "advert content"
+            "footer footer";
+    }
+}
+```
+
+
+
