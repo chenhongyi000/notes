@@ -561,5 +561,133 @@ grid-template-columns: repeat(3,minmax(90px,1fr));
 }
 ```
 
+# 2020.5.15
 
+## JS字符串
+
+### 转义字符
+
+字符串中转义文字引号 在句中使用 “ 或 ‘ 时在前面添加 \ 避免引号被作为结尾
+
+```js
+var myStr = "I am a \"double quoted\" string inside \"double quotes\".";
+```
+
+也可以使用单双引号嵌套使用来解决
+
+```js
+var myStr = 'I am a "double quoted" string inside "double quotes".';
+```
+
+
+
+| 转义字符 |          |
+| -------- | -------- |
+| \\'      | 单引号   |
+| \\"      | 双引号   |
+| \\\      | 反斜线   |
+| \\n      | 换行     |
+| \\t      | tab      |
+| \\b      | 单词边界 |
+| \\r      | 回车     |
+| \\f      | 换页     |
+
+> 注意：反斜线本身必须转义才能显示为反斜线
+
+### 连接字符串
+
+用 + 来连接两个字符串
+
+```js
+var ourStr = "I come first. " + "I come second.";
+//I come first.I come second.
+```
+
+其中也可以添加变量
+
+```js
+var myName = "xiaoming"
+var ourStr = "I come first. " +myName+ " I come second.";
+//I come first. xiaoming I come second.
+```
+
+### 计算数组长度
+
+字符串的.length属性 查找字符串的长度
+
+```js
+var lastNameLength = 0;
+var lastName = "Lovelace";
+lastNameLength = lastName.length;//8
+```
+
+可以使用index值来确定字符串中字符位子 形式: sting[index]
+
+```js
+var firstName = "Charles";
+//查找字符串中第一个元素
+var firstLetter = firstName[0]; // C
+//查找字符串中最后一个元素
+var lastLettet = firstName[firstName.length-1];//s
+```
+
+> 注意：字符串中单个字符是无法更改的 只能改变整个字符串
+
+## JS数组
+
+### push()
+
+将参数推倒数组的末尾
+
+```js
+var arr1 = [1,2,3];
+arr1.push(4);//[ 1, 2, 3, 4 ]
+var arr2 = ["Stimpson", "J", "cat"];
+arr2.push(["happy", "joy"]);//[ 'Stimpson', 'J', 'cat', [ 'happy', 'joy' ] ]
+```
+
+### pop()
+
+从数组中删除最后一个元素并返回该元素
+
+```js
+var arr1 = [1,2,3];
+var removeFromArr1;
+removeFromArr1 = arr1.pop();
+console.log(removeFromArr1);//3
+console.log(arr1);//[1,2]
+```
+
+### shift()
+
+删除数组的第一个元素
+
+```js
+var ourArray = ["Stimpson", "J", ["cat"]];
+var removedFromOurArray = ourArray.shift();
+console.log(ourArray);//[ 'J', [ 'cat' ] ]
+console.log(removedFromOurArray);//Stimpson
+```
+
+###  unshift()
+
+在数组开头添加元素
+
+```js
+var ourArray = ["Stimpson", "J", "cat"];
+ourArray.unshift("Happy");
+console.log(ourArray);//[ 'Happy', 'Stimpson', 'J', 'cat' ]
+```
+
+## JS函数
+
+### 创建函数
+
+function+函数名(){} 创建一个函数
+
+```js
+function Hello(){
+    console.log("hello world");
+}
+```
 
