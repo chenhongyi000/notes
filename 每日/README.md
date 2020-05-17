@@ -691,3 +691,198 @@ function Hello(){
 }
 ```
 
+### 全局变量与局部变量
+
+在此过程中局部变量的优先级大于全局变量
+
+```js
+var someVar = "Hat";
+function myFun() {
+  var someVar = "Head";
+  console.log(someVar);
+}
+myFun();//Head
+```
+
+# 2020.5.16
+
+## JS数组方法
+
+### join()
+
+将数组中的所有元素转化为字符串并连接起来，返回最后生成的字符串。参数为分隔符。默认使用逗号
+
+```js
+var arr = [1,2,3,4];
+console.log(arr.join());
+console.log(arr.join(" "));
+console.log(arr.join("*"));
+console.log(arr.join(""));
+//1,2,3,4
+//1 2 3 4
+//1*2*3*4
+//1234
+```
+
+### reverse()
+
+颠倒数组顺序，返回逆序数组
+
+```js
+var arr = [1,2,3,4];
+console.log(arr.reverse());//[ 4, 3, 2, 1 ]
+```
+
+### sort()
+
+sort()方法将数组中的元素排序并返回排序后的数组。默认以字母表顺序排序
+
+```js
+var a = new Array("banana","cherry","apple");
+console.log(a.sort());//[ 'apple', 'banana', 'cherry' ]
+```
+
+sort()参数为一个比较参数
+
+比较函数返回小于0的数值，第一个参数在前。反之一地个参数在后，应返回一个大于0的数值
+
+sort()方法从小到大排序
+
+```js
+var b = new Array(4,3,2,1);
+console.log(b.sort(function(a,b){return a-b;}))//4,3,2,1
+```
+
+
+
+> 注意：数组中包含undefined元素 ，它们会被排到数组的尾部。
+
+### concat()
+
+创建并返回新数组，新数组为原始数组加参数，不改变原数组
+
+```js
+var arr = [1,2,3];
+console.log(arr);//1,2,3
+console.log(arr.concat(4,5));//1,2,3,4,5
+console.log(arr.concat([4,5]));//1,2,3,4,5
+console.log(arr.concat([4,5],[6,7]));//1,2,3,4,5,6,7
+console.log(arr.concat([4],[[5,6]]));//1, 2, 3, 4, [ 5, 6 ] 
+```
+
+### slice()
+
+返回指定数组的片段或子数组
+
+两个参数：从第一个参数到第二参数前一个
+
+一个参数：从第一个参数开始到最后
+
+负值：倒数
+
+```js
+var arr = [1,2,3,4,5];
+//第一个到第三个
+console.log(arr.slice(0,3));
+//从第三个向后
+console.log(arr.slice(3));
+//第二个到倒数第一个
+console.log(arr.slice(1,-1));
+//倒数第三到倒数第二
+console.log(arr.slice(-3,-2));
+```
+
+### splice()
+
+在数组中插入或删除元素
+
+两个参数：第一个参数开始位置，第二个元素为删除个数
+
+多个参数：前两个参数为删除，后面的属性为插入值
+
+```js
+var arr = [1,2,3,4,5,6,7];
+console.log(arr.splice(2,3));//返回[3,4,5],arr=[1,2,6,7]
+console.log(arr.splice(2));//返回[6,7],arr=[1,2]
+console.log(arr)//[ 1, 2 ]
+arr.splice(2,0,'a','b');
+console.log(arr);// 1, 2, 'a', 'b', 'c' 
+```
+
+> 注意：concat传入数组元素，而splice传入为数组本身
+
+# 2020.5.17
+
+## JS数组方法
+
+### toString()
+
+将数组中的每一个元素变为字符串输出
+
+相当于无参数的join()
+
+```js
+var arr1 = [1,2,3,4,5];
+var arr2 = ["a","b","c"];
+var arr3 = [1,2,[3,4,5]];
+console.log(arr1.toString());
+console.log(arr2.toString());
+console.log(arr3.toString());
+//1,2,3,4,5
+//a,b,c
+//1,2,3,4,5
+```
+
+toLocaleString() 为toString()本地化版本
+
+### forEach()
+
+遍历数组，为每一个元素调用指定函数
+
+传递的函数作为forEach()的参数
+
+传递函数的参数有三个分别为：数组元素、元素索引、数组本身
+
+```js
+var arr = [1,2,3,4,5];
+var sum = 0;
+arr.forEach(function(value,i,a){
+    sum +=value
+})
+console.log(sum);//15
+arr.forEach(function(value,i,a){
+    a[i] = value+1;
+})
+console.log(arr);//[ 2, 3, 4, 5, 6 ]
+```
+
+### map()
+
+将数组中每个元素传递给指定函数，并返回一个数组
+
+map()具有返回值，没有改变原数组
+
+```js
+var a = [1,2,3,4,5];
+var b;
+b = a.map(function(value){
+    return value*2;
+})
+console.log(b);//[ 2, 4, 6, 8, 10 ]
+```
+
+### filter()
+
+通过逻辑函数判断返回原数组的一个子集，返回true或false
+
+返回值为true，则该值将被添加到返回数组中
+
+```js
+var a = [1,2,3,4,5];
+var b;
+b = a.filter(function(value){
+    return value%2 == 1;
+})
+console.log(b);//[ 1, 3, 5 ]
+```
+
