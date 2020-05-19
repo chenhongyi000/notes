@@ -639,6 +639,8 @@ var lastLettet = firstName[firstName.length-1];//s
 
 将参数推倒数组的末尾
 
+返回数组长度
+
 ```js
 var arr1 = [1,2,3];
 arr1.push(4);//[ 1, 2, 3, 4 ]
@@ -800,6 +802,8 @@ console.log(arr.slice(-3,-2));
 
 多个参数：前两个参数为删除，后面的属性为插入值
 
+返回值为删除元素组成的数组
+
 ```js
 var arr = [1,2,3,4,5,6,7];
 console.log(arr.splice(2,3));//返回[3,4,5],arr=[1,2,6,7]
@@ -884,5 +888,63 @@ b = a.filter(function(value){
     return value%2 == 1;
 })
 console.log(b);//[ 1, 3, 5 ]
+```
+
+# 2020.5.18
+
+## JS数组方法
+
+### every()与some()
+
+every()对每一个元素进行逻辑判断。所有元素都满足条件(全部为true)时，返回true
+
+some()有一个元素满足条件就返回true
+
+```js
+var arr1 = [1,2,3,4,5];
+console.log(arr1.every(function(x){return x<10;}));
+console.log(arr1.every(function(x){return x%2==0}));
+console.log(arr1.some(function(x){return x%2 == 0}));
+//true
+//false
+//true
+```
+
+# 2020.5.18
+
+## JS数组位置方法
+
+### indexOf()与lastIndexOf()
+
+查找元素，第一个参数为查找元素，第二个参数为起始位置
+
+indexOf()从数组0位置开始向后查找首次出现元素位置，lastIndexOf()从数组末位置开始向前查找最后一次出现元素位置
+
+```js
+var a = [1,2,3,4,5,4,3,2,1];
+console.log(a.indexOf(3));//2
+console.log(a.lastIndexOf(3));//6
+```
+
+### Reduce()与ReduceRight()
+
+reduce()和reduceRight()都会遍历所有元素，得到返回值
+
+reduce()从左到右，reduceRight()从右到左
+
+第一个参数为回调函数，第二个值为初始值
+
+回调函数第一个参数为初始值或上次的返回值，第二个参数为当前被处理的数组元素
+
+```js
+var a = [1,2,3,4,5];
+var sum = a.reduce(function(value,x){
+    return value+x;
+})
+var sum2 = a.reduce(function(value,x){
+    return value+x;
+})
+console.log(sum);
+console.log(sum2);
 ```
 
