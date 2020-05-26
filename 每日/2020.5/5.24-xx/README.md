@@ -264,3 +264,218 @@ console.log(descriptor.value);//2004
 > Object.defineProperty()如果未设置configurable、enumerable、
 
 > writable特性默认值都为false
+
+# 2020.5.26
+
+## 面向对象
+
+### 构造函数
+
+```js
+function Person(name,age,job){
+    this.name = name;
+    this.age = age;
+    this.job = job;
+    this.sayName = function(){
+        console.log(this.name);
+    }
+
+}
+var person1 = new Person('小明',16,'程序员');
+var person2 = new Person('小红',17,'老师');
+person1.sayName();//小明
+console.log(person2.age);//17
+```
+
+> 构造函数均以大写字母开头，非构造函数以小写字母开头
+>
+> 创建实例必须用new指令
+
+创建对象后，每个对象都具有constructor(构造函数)属性
+
+```js
+console.log(person1.constructor);//Person 指向Person类
+console.log(person2.constructor);//Person
+console.log(person1.constructor == Person);//true
+```
+
+将构造函数作为普通函数调用
+
+```js
+//在浏览器中执行
+Person('xiaoming',18,'程序员');//添加到window
+window.sayName();//小明 
+```
+
+不同势力下的同名函数是不相等的
+
+```js
+console.log(person1.sayName==person2.sayName);//false
+```
+
+### 原型模式
+
+#### 创建原型对象
+
+prototype(原型)属性存在于每一个函数，通过调用构造函数来创建对象的实例的原型对象，可以让实例对象共享它所包含的属性和方法
+
+```js
+function Person(){
+
+}
+Person.prototype.name = 'xiaoming';
+Person.prototype.age = 16;
+Person.prototype.sayName = function(){
+    console.log(this.name);
+}
+var person = new Person();
+console.log(person.age);//16
+person.sayName();//xiaoming
+```
+
+```js
+var person1 = new Person();
+var person2 = new Person();
+console.log(person1.sayName == person2.sayName);//ture
+```
+
+![](F:\notes\每日\2020.5\5.24-xx\images\prototype.png)
+
+调用原型对象的isPrototypeOf()函数来判断实例对象下的[[Prototype]]指针是否指向Person.prototype
+
+ES5中的Object.getPrototypeOf()方法可以直接返回实例对象的[[Prototype]]值
+
+Object.getPrototypeOf()函数可以方便的取到实例对象的原型
+
+```js
+console.log(Person.prototype.isPrototypeOf(person1));//ture
+console.log(Object.getPrototypeOf(person1)==Person.prototype);//true
+```
+
+对象实例存在属性将不会继续访问原型，阻碍了访问原型属性
+
+```js
+person1.name = 'wang';
+console.log(person1.name);//实例属性 wang
+console.log(person2.name);//原型属性 xiaoming
+```
+
+可以通过delete操作符来完全删除实例属性，恢复对原型name属性链接
+
+```js
+delete person1.name;
+console.log(person1.name);//xiaoming
+```
+
+#### 判断是否存在于实例
+
+hasOwnProperty()函数可以判断属性是否存在于实例中，存在实例中为true(此方法从Object继承)
+
+```js
+function Person(){};
+Person.prototype.name = '小明';
+Person.prototype.age = 18;
+var person1 = new Person();
+var person2 = new Person();
+person1.name = '小王';
+console.log(person1.hasOwnProperty("name"));//true
+console.log(person2.hasOwnProperty("name"));//false
+```
+
+in操作符可以判断属性是否存在于对象中，不论实例或原型
+
+```js
+function Person(){};
+Person.prototype.name = '小明';
+Person.prototype.age = 18;
+var person1 = new Person();
+var person2 = new Person();
+person1.name = '小王';
+console.log("name" in person1);//true
+console.log("name" in person2);//true
+delete person1.name;
+console.log("name" in person1);//true
+```
+
+#### 获取实例属性名
+
+Object.keys()函数可以将对象中的可枚举属性作为字符串数组返回，参数为对象
+
+constructor与prototype的enumerable特性为false
+
+```js
+function Person(){};
+Person.prototype.name = '小明';
+Person.prototype.age = 18;
+var person1 = new Person();
+console.log(Object.keys(Person.prototype));//[ 'name', 'age' ]
+person1.name = '小王';
+console.log(Object.keys(person1));;//[ 'name' ]
+```
+
+可调用Object.getOwnPropertyNames()函数来获取所有实例属性，无论它是否可枚举
+
+```js
+console.log(Object.getOwnPropertyNames(Person.prototype));//[ 'constructor', 'name', 'age' ]
+```
+
+#### 原型的封装
+
+```js
+function Person(){};
+Person.prototype = {
+    name: 'wang',
+    age: 20,
+    job: 'teacher',
+    sayName:function(){
+        console.log(this.name);
+    }
+}
+var person = new Person();
+console.log(person.constructor);//[Function: Object]
+```
+
+将原型改为这种写法，对默认的原型对象重新定义，更改了constructor,
+
+使它指向Object构造函数
+
+我们将constructor设置为适当的值
+
+```js
+function Person(){};
+Person.prototype = {
+    constructor: Person,
+    name: 'wang',
+    age: 20,
+    job: 'teacher',
+    sayName:function(){
+        console.log(this.name);
+    }
+}
+```
+
+设置之后，可以访问正常的constructor值，但是这样设置会导致constructor的enumerable特性值为true，默认情况下，原生的constructor是不可枚举的
+
+可以通过Object.defineProperty()来重新定义constructor属性
+
+```js
+function Person(){};
+Person.prototype = {
+    name: 'wang',
+    age: 20,
+    job: 'teacher',
+    sayName:function(){
+        console.log(this.name);
+    }
+}
+//重设构造函数，只适合支持ES5的浏览器
+Object.defineProperty(Person.prototype,"constructor",{
+    enumerable: false,
+    value: Person
+})
+var person = new Person();
+console.log(person.constructor);//[Function: Object]
+```
+
+
+
