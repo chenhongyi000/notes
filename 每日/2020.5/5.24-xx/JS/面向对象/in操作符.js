@@ -1,0 +1,10 @@
+function Person(){};
+Person.prototype.name = '小明';
+Person.prototype.age = 18;
+var person1 = new Person();
+var person2 = new Person();
+person1.name = '小王';
+console.log("name" in person1);
+console.log("name" in person2);
+delete person1.name;
+console.log("name" in person1);
