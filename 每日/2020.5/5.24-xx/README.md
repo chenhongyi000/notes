@@ -477,5 +477,86 @@ var person = new Person();
 console.log(person.constructor);//[Function: Object]
 ```
 
+# 2020.5.27
 
+## 面向对象
+
+### 原型模式
+
+#### 原型动态性
+
+重写原型后，改变了构造函数与最初原型的关系
+
+构造函数原型指向新原型
+
+实例化对象指向原型
+
+```js
+function Person(){};
+var friend = new Person();
+Person.prototype = {
+    constructor: Person,
+    name: 'xiaoming',
+    age: 17,
+    sayName: function(){
+        console.log(this.name)
+    }
+}
+friend.sayName();//抛出错误 
+```
+
+#### 原型共享
+
+原型中所有属性被大多数实例共享
+
+```js
+function Person(){}
+Person.prototype = {
+    constructor: Person,
+    name: 'xiaoming',
+    age: 17,
+    friends: ['xiaohong','xiaowang'],
+    sayName: function(){
+        console.log(this.name);
+    }
+}
+var person1 = new Person();
+var person2 = new Person();
+person1.friends.push('lihua');
+console.log(person1.friends);//[ 'xiaohong', 'xiaowang', 'lihua' ]
+console.log(person2.friends);//[ 'xiaohong', 'xiaowang', 'lihua' ]
+console.log(person1.friends === person2.friends);//true
+```
+
+friends数组存在于Person.prototype中，也能通过person2来查看
+
+### 组合构造函数与原型模式
+
+构造函数定义实例属性
+
+原型模式定义方法与共享属性
+
+```js
+function Person(name,age,job){
+    this.name = name;
+    this.age = age;
+    this.job = job;
+    this.friends = ["Shelby","Court"];
+};
+Person.prototype = {
+    constructor: Person,
+    sayName: function(){
+        console.log(this.name);
+    }
+}
+var person1 = new Person("xiaoming",19,"teacher");
+var person2 = new Person("xiaohong",26,"Doctor");
+person1.friends.push("xiaowang");
+console.log(person1.friends);//[ 'Shelby', 'Court', 'xiaowang' ]
+console.log(person2.friends);//[ 'Shelby', 'Court' ]
+console.log(person1.friends === person2.friends);//false
+console.log(person1.sayName === person2.sayName);//true
+```
+
+### 继承
 
