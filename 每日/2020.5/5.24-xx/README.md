@@ -558,5 +558,32 @@ console.log(person1.friends === person2.friends);//false
 console.log(person1.sayName === person2.sayName);//true
 ```
 
+# 2020.5.28
+
+## 面向对象
+
 ### 继承
+
+#### 原型链
+
+```js
+function SuperType(){
+    this.property = true;
+}
+SuperType.prototype.getSuperValue = function(){
+    return this.property;
+}
+function SubType(){
+    this.subproperty = false;
+}
+//继承了SuperType
+SubType.prototype = new SuperType();
+SubType.prototype.getSubValue = function(){
+    return this.subproperty;
+}
+var instance = new SubType();
+console.log(instance.getSuperValue());
+```
+
+
 
