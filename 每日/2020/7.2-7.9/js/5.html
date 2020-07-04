@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // window.moveTo(100,100);
+        // window.moveBy(100,100);
+        // console.log(document.documentElement.clientWidth);
+        // window.resizeTo(100,100);
+
+        // var time = setTimeout(function(){
+        //     console.log('123');
+        // },1000);
+        // clearTimeout(time);
+        //  var time = setInterval(function(){
+        //     console.log('123');
+        // },1000);
+        // clearInterval(time);
+
+        //setInterval()例子
+        // var num = 0;
+        // var max = 10;
+        // var intervalId = null;
+        // function increamentNumber(){
+        //     num++;
+        //     console.log(num);
+        //     if(num == max){
+        //         clearInterval(intervalId);
+        //         console.log("Done");
+        //     }
+        // }
+        // intervalId = setInterval(increamentNumber,500);
+
+        //setTimeout例：
+        var num = 0;
+        var max = 10;
+        var timeoutId = null;
+        function increamentNumber(){
+            num++;
+            console.log(num);
+            if(num<max){
+                setTimeout(increamentNumber,500);
+            }else{
+                clearTimeout(timeoutId);
+                console.log("Done");
+            }
+        }
+        timeoutId = setTimeout(increamentNumber,500);
+    </script>
+</body>
+</html>
