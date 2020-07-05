@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        在全局作用域下定义的变量与方法均在window下
+        var age = 17;
+        function sayAge(){
+            console.log(this.age);
+        }
+        console.log(window.age);
+        sayAge();
+        window.sayAge();
+        */
+
+       /*
+       delete不可以删除全局属性，可以删除定义在window下的属性
+       var age = 20;
+       window.name = 'wang';
+       delete window.age;//IE<9抛出错误，其他浏览器返回false
+       delete window.name; //IE<9抛出错误，其他浏览器返回true
+       console.log(age);//20
+       console.log(window.name);//undefined
+       */
+      /*
+        var newValue = value;
+        var newValue = window.value;
+        console.log(newValue);//value not defined
+      */
+    </script>
+</body>
+</html>

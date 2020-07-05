@@ -585,5 +585,5 @@ var instance = new SubType();
 console.log(instance.getSuperValue());
 ```
 
-
+![](F:\notes\每日\2020.5\5.24-xx\images\原型链.png)
 

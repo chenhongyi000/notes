@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function getQueryStringArgs(){
+            //去除？
+            var qs = (location.search.length>0?location.search.substring(1):"");
+            args = {},
+            //以&分割为多个数组
+            items = qs.length?qs.split("&"):[],item = 0,name = null,value = null;
+            //循环数组，用等号分割
+            for(var i=0;i<items.length;i++){
+                item = items[i].split("=");
+                name = decodeURIComponent(item[0]);
+                value = decodeURIComponent(item[1]);
+                if(name.length){
+                    args[name] = value;
+                }
+            }
+            return args;
+        }
+        var args = getQueryStringArgs();
+        console.log(args);
+    </script>
+</body>
+</html>
