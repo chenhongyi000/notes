@@ -266,3 +266,66 @@ var args = getQueryStringArgs();
 console.log(args);//例?q=1&p=2 结果：{q: "1", p: "2"}
 ```
 
+location.assign()方法可以立即代开新的URL并在浏览器历史记录中生成一条记录
+
+将location.href或window.location设置为一个URL也可以调用assign()方法
+
+```js
+location.assign('https://www.baidu.com');
+window.location('https://www.baidu.com');
+location.href('https://www.baidu.com');
+```
+
+修改location对象的其他属性也可以更改当前页面的URL
+
+```js
+location.hash = '#123';
+location.search = '?p=js';
+location.hostname = 'xxx.com';
+location.pathname = "home";
+location.port = 8080;
+```
+
+replace()方法：更改URL后不能后退到之前的页面
+
+```js
+setTimeout(function(){
+    location.replace("https://www.baidu.com");
+},1000)
+```
+
+reload()方法：重新加载页面
+
+```js
+//有参数并且为true，强行从服务器重新加载
+location.reload(true);
+//不带参数，页面从缓存中重新加载
+location.reload();
+```
+
+### navigator对象
+
+mavigator对象的属性常用于检查网页浏览器的类型
+
+如：appCodeName：浏览器的名称
+
+appName：完整的浏览器名称
+
+language：浏览器的主语言 。。。。属性
+
+#### 检测插件
+
+检测浏览器中是否安装了特定的插件。
+
+对于非IE来说，可以使用navigator.plugins数组来检查。
+
+# 2020.7.6
+
+## DOM
+
+DOM：文档对象模型，是针对HTML与XML文档的一个API
+
+DOM描述的是一个层次化的节点树，允许添加移除与修改。
+
+> IE的DOM实际是以COM对象的形式实现的。
+
