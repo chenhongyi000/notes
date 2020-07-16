@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        #box1{
+            background-color: forestgreen;
+        }
+        #box1 .box2{
+            background-color: aqua;
+        }
+        /*  行级元素
+            父级元素宽度足够，行级元素会与文本内容同处一行 
+            宽度不够，切换到下一行
+        */
+        #box2{
+            width: 200px;
+            background-color: violet;
+        }
+    </style>
+</head>
+<body>
+    <div id="box1">father
+        <div class="box2">son</div>
+    </div>
+    <div id="box2">
+        content。。。。。
+        <span>2222</span>
+        <span>3333</span>
+        <span>3333</span>
+        <span>ppppppppppppppppppppppppppppppppp</span>
+    </div>
+</body>
+</html>
