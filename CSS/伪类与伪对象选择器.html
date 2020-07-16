@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>伪类与伪对象选择器</title>
+    <style>
+        #box1{
+            width: 500px;
+            height: 600px;
+            border: 1px solid #000;
+        }
+        #box1 li:hover{
+            background: #ee2461;
+        }
+        /* #box1下面的每一代中的li的最后一个 */
+        /* 每一个ul中的最后一个li */
+        /* #box1 li:last-child{
+            border-bottom: 1px solid #000;
+        } */
+        /* #box1后代中每一代的所有元素的最后一个 无论什么标签*/
+        /* #box1 :last-child{
+            border-bottom: 1px solid #000;
+        } */
+        /* 选中子代中偶数位元素 */
+        #box1 :nth-child(2n){
+            border-bottom: 1px solid #38b0ff;
+        }
+        /* 选中第二个孩子，但是第二个孩子不是p */
+        /* 选中第n个元素 前面规定标签类型 */
+        /* #box p:nth-child(2){
+
+        } */
+        /*  */
+        #box1 li:nth-of-type(1){
+            color: #c63;
+        }
+
+        /* 伪对象选择器 伪元素选择器 */
+        #box1>p::after{
+            content: '/爱心'
+        }
+    </style>
+</head>
+<body>
+    <!--  -->
+    <div id="box1">
+        <p>hello</p>
+        <ul>
+            <li>1
+                <ul>
+                    <li>a</li>
+                    <li>b</li>
+                </ul>
+            </li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+        <p>p1</p>
+        <p>p2</p>
+    </div>
+</body>
+</html>
