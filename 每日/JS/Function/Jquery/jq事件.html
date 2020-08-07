@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn1">点我</button>
+    <ul id="ul1">
+        <li>item1</li>
+        <li class="aa">item2</li>
+        <li class="aa">item3</li>
+        <li>item4</li>
+        <li>item5</li>
+    </ul>
+    <script src="./jquery-3.5.1.js"></script>
+    <script>
+        $(function(){
+            var oBtn = document.getElementById("btn1");
+            // oBtn.onclick = function(){
+            //     console.log(123);
+            // }
+            // oBtn.onclick = function(){
+            //     console.log(345);
+            // }
+            //false 事件冒泡 true 事件捕获
+            // oBtn.addEventListener('click',function(){
+            //     console.log(123);
+            // },false)
+            // oBtn.addEventListener('click',function(){
+            //     console.log(345);
+            // },false)
+            // $('#btn1').click(function(){
+            //     console.log(123);
+            // })
+            // $('#btn1').click(function(){
+            //     console.log(345);
+            // })
+            // $('#btn1').on("click",function(){
+            //     console.log(123);
+            // })
+
+            // var liClickHandler = function(){
+            //     console.log(this.innerHTML);
+            // }
+
+            // var oUl1 = document.getElementById("ul1");
+            // var aLi = oUl1.getElementsByTagName("li");
+            // for(var i=0;i<aLi.length;i++){
+                // aLi[i].addEventListener("click",function(){
+                //     //此处每有一个li 创建一个funciton
+                //     console.log(this.innerHTML);
+                // },false);
+                // aLi[i].addEventListener("click",liClickHandler,false);
+                //}
+
+            // //事件委托
+            // //1. 子元素过多绑定问题
+            // //2. 后生成元素的事件绑定问题
+            // var oUl = document.getElementById("ul1");
+            // oUl.onclick =  function(e){
+            //     //ie 8以及之前e undefined
+            //     e = e || window.event;
+            //     //事件源 e.target
+            //     var target = e.target || e.srcElement;
+            //     //console.log(target.tagName);
+            //     if(target.tagName == "LI"){
+            //         console.log(target.innerHTML);
+            //     }
+            // }
+
+            //jq事件绑定
+            //on()：第二个参数为选择器字符串
+            //contains('4')：内容中包含4
+            $('#ul1').on("click",":contains('4')",function(e){
+                if(e.target.tagName == "LI"){
+                    console.log(e.target.innerHTML);
+                }
+            })
+        })
+    </script>
+</body>
+</html>
